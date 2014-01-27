@@ -1,6 +1,7 @@
 RegExTractor
 ============
 
+<img align="right" src="http://www.iuliux.ro/images/tractor_silhouette.png" width="150px" />
 Python regex extractor (list of strings => Regex)
 
 Description
