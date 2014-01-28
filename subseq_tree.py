@@ -1,3 +1,10 @@
+'''
+Tree structure where every node is a common substring of either characters or
+character classes. Leaves are lists of strings where no common substring can
+be extracted anymore (e.g. ["AA", "A", ""]).
+'''
+
+
 import re
 from utils import *
 
