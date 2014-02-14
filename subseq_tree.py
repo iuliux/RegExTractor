@@ -22,11 +22,14 @@ class Decisioner(object):
 def chars_to_classes(cs):
     '''Replaces characters with their class reference'''
     # Alphabetic
-    cs = re.sub(r'[a-zA-Z]', 'A', cs)
+    cs = re.sub(r'[a-z]', 'a', cs)
+    cs = re.sub(r'[A-Z]', 'A', cs)
     # Numerical
     cs = re.sub(r'[0-9]', 'N', cs)
+    # Space has it's own class
+    cs = re.sub(r' ', 'S', cs)
     # Special
-    cs = re.sub(r'[^AN]', 'S', cs)
+    cs = re.sub(r'[^aANS]', 'O', cs)
     return cs
 
 def gen_tree(strs, tp='chars'):
@@ -79,10 +82,12 @@ def tree_to_regex(tree):
         return (clss, minim, maxim)
 
     clss = {
-        'A': 'a-zA-Z',
+        'a': 'a-z',
+        'A': 'A-Z',
         'N': '0-9',
-        # 'S': '!@#$%^&*()_+=-`~\'";:,<.>/?\\]}[{',
-        'S': '!@#$%',
+        'S': ' ',
+        'O': '!@#$%^&*()_+=-`~\'";:,<.>/?\\]}[{',
+        # 'O': '!@#$%',
     }
 
     if type(tree) == dict:

@@ -38,4 +38,4 @@ if __name__ == '__main__':
 
     s1 = '<div></div>'
     s2 = '<span></span>'
-    print extract([s1])
+    print extract([s1, s2])
