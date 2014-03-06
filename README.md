@@ -26,3 +26,9 @@ Demo
 ----
 
 `TODO`
+
+
+TODO
+----
+
+- include word-boundries where present
