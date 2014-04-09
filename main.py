@@ -12,7 +12,7 @@ generalizes, usually matching more.
 Iulius Curt, 2014
 '''
 
-from subseq_tree import gen_tree, tree_to_regex
+from subseq_tree import gen_tree, tree_to_regex, tree_to_HTML
 
 
 def extract(strs):
@@ -24,6 +24,10 @@ def extract(strs):
     # pp = pprint.PrettyPrinter()
     # pp.pprint(tree)
     return tree_to_regex(tree)
+
+def extract_HTML(strs):
+    tree = gen_tree(strs)
+    return tree_to_HTML(tree)
 
 
 if __name__ == '__main__':
