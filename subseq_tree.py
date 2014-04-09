@@ -97,8 +97,23 @@ def tree_to_regex(tree):
                     tree_to_regex(tree['right'])
         elif tree['type'] == 'classes':
             out = ''
+            last = ''
+            count = 0
             for c in tree['root']:
-                out += '[%s]' % clss[c]
+                if c == last:
+                    count += 1
+                elif last == '':
+                    last = c
+                    count = 1
+                else:
+                    out += '[%s]' % clss[last]
+                    if count > 1:
+                        out += '{%d}' % count
+                    last = c
+                    count = 1
+            out += '[%s]' % clss[last]
+            if count > 1:
+                out += '{%d}' % count
             return  tree_to_regex(tree['left']) + \
                     out + \
                     tree_to_regex(tree['right'])
@@ -162,9 +177,30 @@ def tree_to_HTML(tree):
                     tree_to_HTML(tree['right'])
         elif tree['type'] == 'classes':
             out = ''
+            last = ''
+            count = 0
             for c in tree['root']:
-                out += '<span class="rgt-range rgt-tooltip">'
-                out += '[%s]' % clss[c]
+                if c == last:
+                    count += 1
+                elif last == '':
+                    last = c
+                    count = 1
+                else:
+                    out += '<span class="rgt-range rgt-tooltip">'
+                    out += '[%s]' % clss[last]
+                    out += '</span>'
+                    if count > 1:
+                        out += '<span class="rgt-counts">'
+                        out += '{%d}' % count
+                        out += '</span>'
+                    last = c
+                    count = 1
+            out += '<span class="rgt-range rgt-tooltip">'
+            out += '[%s]' % clss[last]
+            out += '</span>'
+            if count > 1:
+                out += '<span class="rgt-counts">'
+                out += '{%d}' % count
                 out += '</span>'
             return  tree_to_HTML(tree['left']) + \
                     out + \
@@ -208,9 +244,17 @@ if __name__ == '__main__':
     s2 = 'xby#340'
     s3 = 'sbs@00000'
     # pp.pprint(gen_tree([s1, s2, s3]))
-    print tree_to_HTML(gen_tree([s1, s2, s3]))
+    # print tree_to_HTML(gen_tree([s1, s2, s3]))
+    print tree_to_regex(gen_tree([s1, s2, s3]))  # [a-z]b[a-z][!@#$%^&*()_+=-`~'";:,<.>/?\\]}\[{][0-9]{0,3}0[0-9]{0,4}
 
     s1 = 'skull'
     s2 = 'school'
     # pp.pprint(gen_tree([s1, s2]))
-    print tree_to_HTML(gen_tree([s1, s2]))
+    print tree_to_regex(gen_tree([s1, s2]))  # s[a-z][a-z][a-z]{0,2}l[a-z]?
+
+    s1 = 'RFC 821'
+    s2 = 'RFC 6409'
+    print
+    print tree_to_regex(gen_tree([s1, s2]))
+    print
+    pp.pprint(gen_tree([s1, s2]))
