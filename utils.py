@@ -2,17 +2,35 @@ import numpy as np
 
 
 def long_substr(strgs):
-    '''Returns the longest common substring of @strgs'''
+    '''Returns a list with the longest common substring sequences from @strgs'''
     # Based on: http://stackoverflow.com/questions/2892931/longest-common-substring-from-more-than-two-strings-python
-    substr = ''
+    # Copy the list
+    strgs = strgs[:]
     if len(strgs) > 1 and len(strgs[0]) > 0:
-        for i in range(len(strgs[0])):
-            for j in range(len(strgs[0])-i+1):
-                if j > len(substr) and all(strgs[0][i:i+j] in x for x in strgs):
-                    substr = strgs[0][i:i+j]
+        substrs = []
+        substr = None
+        maxlen = 1
+        while True:
+            if substr is not None and len(substr) >= maxlen:
+                # A max lenght seq
+                substrs.append(substr)
+                maxlen = len(substr)
+                for i, s in enumerate(strgs):
+                    strgs[i] = s.replace(substr, '', 1)
+            elif substr is not None and len(substr) < maxlen:
+                # Not the first run and not longest seq also
+                break
+
+            substr = ''
+            for i in range(len(strgs[0])):
+                for j in range(len(strgs[0])-i+1):
+                    if j > len(substr) and all(strgs[0][i:i+j] in x for x in strgs):
+                        substr = strgs[0][i:i+j]
+        return substrs
     elif len(strgs) == 1:
-        return strgs[0]
-    return substr
+        return [strgs[0]] if len(strgs[0]) > 0 else []
+    else:
+        return []
 
 def levenshtein(source, target):
     '''Computes the Levenshtein distance between 2 strings'''
@@ -43,15 +61,18 @@ def levenshtein(source, target):
                 current_row[1:],
                 current_row[0:-1] + 1)
         previous_row = current_row
- 
+
     return previous_row[-1]
 
 if __name__ == '__main__':
-    s1 = 'Oh, hello, my friend.'
-    s2 = 'I prefer Jelly Belly beans.'
-    s3 = 'When hell freezes over!'
+    s1 = 'Oh, hello, my friend...'
+    s2 = 'I prefer Jelly Belly beans...'
+    s3 = 'When hell freezes... over!'
     print long_substr([s1, s2, s3])
     print long_substr(['0', 'a'])
+    print long_substr(['abba'])
+    print long_substr([''])
+    print long_substr([])
     print levenshtein(s1, s2)
     print levenshtein(s1, s3)
     print levenshtein(s2, s3)

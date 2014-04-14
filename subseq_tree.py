@@ -18,6 +18,26 @@ class Decisioner(object):
         if maxim - minim > 4:
             return True
 
+    @staticmethod
+    def prioritize_LCSeqs(lcss):
+        '''Taking a list of longest common sequences, it decides the best'''
+        # Class priorities (first = largest priority)
+        # [change this order to adjust priorities]
+        cls_ordering = ['#', 'O', 'S', 'N', 'A', 'a']
+
+        def class_representative(s):
+            if len(s) == 0:
+                return '#'  # This case should never be reached
+            repc = s[0]
+            for c in s:
+                if c != repc:
+                    return '#'  # Mixed classes
+            return repc
+
+        lcsclss = [class_representative(chars_to_classes(s)) for s in lcss]
+        return [cls_ordering.index(c) for c in lcsclss]
+
+
 
 def chars_to_classes(cs):
     '''Replaces characters with their class reference'''
@@ -34,7 +54,19 @@ def chars_to_classes(cs):
 
 def gen_tree(strs, tp='chars'):
     '''Generates a tree with longest common substrings as nodes'''
-    lcs = long_substr(strs)
+    lcss = long_substr(strs)
+    if len(lcss) == 0:
+        lcs = ''
+    else:
+        lcs_prs = Decisioner.prioritize_LCSeqs(lcss)
+        imin = 0
+        xmin = 1000
+        # Find the #1 priority
+        for i, p in enumerate(lcs_prs):
+            if p < xmin:
+                xmin = p
+                imin = i
+        lcs = lcss[imin]
 
     if not lcs:
         if tp == 'chars':
@@ -258,3 +290,9 @@ if __name__ == '__main__':
     print tree_to_regex(gen_tree([s1, s2]))
     print
     pp.pprint(gen_tree([s1, s2]))
+
+    s1 = 'Oh, hello, my friend...'
+    s2 = 'I prefer Jelly Belly beans...'
+    s3 = 'When hell freezes... over!'
+    print tree_to_regex(gen_tree([s1, s2, s3]))
+    pp.pprint(gen_tree([s1, s2, s3]))
