@@ -25,7 +25,7 @@ the generated regex.
 Demo
 ----
 
-`TODO`
+Can be seen in action on [Semantickle-demos page](http://semantickle.com/demos/regextractor/).
 
 
 TODO
