@@ -1,10 +1,10 @@
 RegExTractor
 ============
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/iuliux/RegExTractor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 <img align="right" src="http://www.iuliux.ro/images/tractor_silhouette.png" width="150px" />
 Python regex extractor (list of strings => Regex)
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/iuliux/RegExTractor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Description
 -----------
