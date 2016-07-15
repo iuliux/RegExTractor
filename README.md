@@ -24,11 +24,6 @@ First of all, you can run the demos found in `main.py` (in the `if __main__` par
 The main function is `extract(strs)` from `main.py` that takes a list of strings and returns a string representing
 the generated regex.
 
-Demo
-----
-
-Can be seen in action on [Semantickle-demos page](http://semantickle.com/demos/regextractor/).
-
 
 TODO
 ----
