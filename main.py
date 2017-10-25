@@ -1,5 +1,5 @@
 '''
-RegExTractor 
+RegExTractor
 ------------
 
 Python regex extractor.
@@ -35,11 +35,14 @@ if __name__ == '__main__':
     s2 = 'xby#340'
     s3 = 'sbs@00000'
     print extract([s1, s2, s3])
+    print
 
     s1 = 'skull'
     s2 = 'school'
     print extract([s1, s2])
+    print
 
     s1 = '<div></div>'
     s2 = '<span></span>'
     print extract([s1, s2])
+    print
