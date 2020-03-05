@@ -2,8 +2,10 @@ import numpy as np
 
 
 def long_substr(strgs):
-    '''Returns a list with the longest common substring sequences from @strgs'''
-    # Based on: http://stackoverflow.com/questions/2892931/longest-common-substring-from-more-than-two-strings-python
+    """
+    Returns a list with the longest common substring sequences from @strgs
+    Based on: http://stackoverflow.com/questions/2892931/longest-common-substring-from-more-than-two-strings-python
+    """
     # Copy the list
     strgs = strgs[:]
     if len(strgs) > 1 and len(strgs[0]) > 0:
@@ -23,7 +25,7 @@ def long_substr(strgs):
 
             substr = ''
             for i in range(len(strgs[0])):
-                for j in range(len(strgs[0])-i+1):
+                for j in range(len(strgs[0]) - i + 1):
                     if j > len(substr) and all(strgs[0][i:i+j] in x for x in strgs):
                         substr = strgs[0][i:i+j]
         return substrs
@@ -33,7 +35,7 @@ def long_substr(strgs):
         return []
 
 def levenshtein(source, target):
-    '''Computes the Levenshtein distance between 2 strings'''
+    """ Computes the Levenshtein distance between 2 strings """
     if len(source) < len(target):
         return levenshtein(target, source)
     # So now we have len(source) >= len(target).
@@ -53,16 +55,15 @@ def levenshtein(source, target):
         # Substitution or matching:
         # Target and source items are aligned, and either
         # are different (cost of 1), or are the same (cost of 0).
-        current_row[1:] = np.minimum(
-                current_row[1:],
-                np.add(previous_row[:-1], target != s))
+        current_row[1:] = np.minimum(current_row[1:],
+                                     np.add(previous_row[:-1], target != s))
         # Deletion (target grows shorter than source):
-        current_row[1:] = np.minimum(
-                current_row[1:],
-                current_row[0:-1] + 1)
+        current_row[1:] = np.minimum(current_row[1:],
+                                     current_row[0:-1] + 1)
         previous_row = current_row
 
     return previous_row[-1]
+
 
 if __name__ == '__main__':
     s1 = 'Oh, hello, my friend...'
