@@ -13,8 +13,6 @@ matches similar strings.
 The generated RegEx always matches the original strings, but it also
 generalizes, usually matching more.
 
-Iulius Curt, 2014
-
 Usage
 -----
 
