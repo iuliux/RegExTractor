@@ -277,22 +277,22 @@ if __name__ == '__main__':
     s3 = 'sbs@00000'
     # pp.pprint(gen_tree([s1, s2, s3]))
     # print tree_to_HTML(gen_tree([s1, s2, s3]))
-    print tree_to_regex(gen_tree([s1, s2, s3]))  # [a-z]b[a-z][!@#$%^&*()_+=-`~'";:,<.>/?\\]}\[{][0-9]{0,3}0[0-9]{0,4}
+    print(tree_to_regex(gen_tree([s1, s2, s3])))  # [a-z]b[a-z][!@#$%^&*()_+=-`~'";:,<.>/?\\]}\[{][0-9]{0,3}0[0-9]{0,4}
 
     s1 = 'skull'
     s2 = 'school'
     # pp.pprint(gen_tree([s1, s2]))
-    print tree_to_regex(gen_tree([s1, s2]))  # s[a-z][a-z][a-z]{0,2}l[a-z]?
+    print(tree_to_regex(gen_tree([s1, s2])))  # s[a-z][a-z][a-z]{0,2}l[a-z]?
 
     s1 = 'RFC 821'
     s2 = 'RFC 6409'
-    print
-    print tree_to_regex(gen_tree([s1, s2]))
-    print
+    print()
+    print(tree_to_regex(gen_tree([s1, s2])))
+    print()
     pp.pprint(gen_tree([s1, s2]))
 
     s1 = 'Oh, hello, my friend...'
     s2 = 'I prefer Jelly Belly beans...'
     s3 = 'When hell freezes... over!'
-    print tree_to_regex(gen_tree([s1, s2, s3]))
+    print(tree_to_regex(gen_tree([s1, s2, s3])))
     pp.pprint(gen_tree([s1, s2, s3]))
