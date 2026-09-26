@@ -69,11 +69,11 @@ if __name__ == '__main__':
     s1 = 'Oh, hello, my friend...'
     s2 = 'I prefer Jelly Belly beans...'
     s3 = 'When hell freezes... over!'
-    print long_substr([s1, s2, s3])
-    print long_substr(['0', 'a'])
-    print long_substr(['abba'])
-    print long_substr([''])
-    print long_substr([])
-    print levenshtein(s1, s2)
-    print levenshtein(s1, s3)
-    print levenshtein(s2, s3)
+    print(long_substr([s1, s2, s3]))
+    print(long_substr(['0', 'a']))
+    print(long_substr(['abba']))
+    print(long_substr(['']))
+    print(long_substr([]))
+    print(levenshtein(s1, s2))
+    print(levenshtein(s1, s3))
+    print(levenshtein(s2, s3))
